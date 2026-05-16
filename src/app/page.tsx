@@ -6,6 +6,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <h1>Welcome to nextjs-starter-sdlc</h1>
         <Image className={styles.logo} src="/next.svg" alt="Next.js logo" width={100} height={20} priority />
         <div className={styles.intro}>
           <h1>Non-opinionated TypeScript starter for Next.js</h1>
