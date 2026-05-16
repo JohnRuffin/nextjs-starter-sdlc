@@ -22,7 +22,8 @@
     "format": "oxfmt --write",
     "format:check": "oxfmt --check",
     "format:ci": "oxfmt --list-different .",
-    "postinstall": "husky"
+    "postinstall": "husky",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "0.13.11",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@commitlint/cli": "21.0.0",
     "@commitlint/config-conventional": "21.0.0",
+    "@playwright/test": "^1.60.0",
     "@types/node": "25.6.2",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",

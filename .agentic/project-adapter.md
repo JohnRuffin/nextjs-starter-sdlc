@@ -1,0 +1,164 @@
+<!-- BEGIN AGENTIC-SDLC PROJECT ADAPTER -->
+# Project Adapter
+
+## Project Type
+
+- web application
+
+## Issue Required Sections
+
+- Context
+- Requirements
+- Acceptance Criteria
+- Target Files
+
+## Issue Draft Location
+
+- optional local drafts in `.agentic/issues/drafts/`
+- live provider work items remain the source of truth after publication
+
+## Execution Start Condition
+
+Implementation may begin when the issue has `in-progress` and does not have `hold` or `needs-human`.
+
+## Plan Visibility Mode
+
+- issue comment
+
+## Human Control Signals
+
+Labels:
+
+- `hold`
+- `needs-human`
+
+Comments:
+
+- `stop`
+- `hold`
+- `change approach`
+- `re-plan`
+
+Issue comments and PR comments are both valid control surfaces.
+
+Once a PR exists, the PR thread becomes the preferred steering surface.
+
+## Merge Policy
+
+- default behavior is auto-merge after required verification and policy checks pass
+- `merge:human-required` is the explicit human-in-the-middle merge gate
+- `hold` and `needs-human` are pause or interruption controls, not the primary long-term merge policy label
+
+## State Labels
+
+Lifecycle:
+
+- `ready-for-build`
+- `in-progress`
+- `in-review`
+- `done`
+
+Supporting labels:
+
+- `topology:combined`
+- `topology:split`
+- `agent-builder`
+- `frontend`
+- `backend`
+- `full-stack`
+- `config-only`
+- `docs-only`
+- `merge:human-required`
+- `hold`
+- `needs-human`
+
+## Branch Naming
+
+- `issue-<number>-<slug>`
+
+## Implementation Backend Contract
+
+- bounded implementation command: `agentic:implement` when the repository defines it
+- runtime owns branch integrity checks, commit creation, push, and PR synchronization
+- implementation command must stay on the issue branch
+- implementation command must not create extra branches or mutate PR state directly
+- implementation success requires changes to remain within declared `Target Files` or mapped subsystem scope
+
+## Required Pre-Read Docs
+
+- `README.md`
+
+## Verification Commands
+
+- `pnpm lint`
+- `pnpm build`
+- `pnpm test`
+- `pnpm test:e2e`
+
+## Scope Rules
+
+- `Target Files` should use concrete file or directory paths when possible
+- `Target Subsystem` may use repository-recognized subsystem names when the profile maps them to concrete paths
+- `docs-only` and `config-only` labels narrow the declared scope further; they do not widen it
+
+## Browser Validation
+
+- command: `not-configured`
+- provider: `none`
+- status: `not-configured`
+
+## Validation Mode
+
+- `local-only`
+
+Validation mode meanings:
+
+- `local-only`
+  - lint and build run locally, with no required hosted preview gate
+- `preview-required`
+  - a preview deploy and human review are expected before merge
+- `production-gated`
+  - preview validation plus explicit human approval is required before merge or deploy
+
+## Preview Deployment
+
+- provider: `none`
+- status: `not-configured`
+
+## Human QA Gate
+
+- `not-configured`
+
+## User-Visible Change Policy
+
+- screenshots required for user-visible changes
+- Playwright coverage required for navigation, forms, cart, checkout, account, or pricing presentation changes
+- preview link required if preview deployments exist
+
+## Evidence Requirements
+
+- screenshots
+- verification summary
+- trace or video for browser automation
+- preview deployment link if available
+
+## Automation Hooks
+
+- issue readiness validation
+- draft PR bootstrapper
+- issue and PR state sync
+
+## Stop-And-Ask Conditions
+
+- authentication or session model changes
+- billing or payment provider changes
+- tax, shipping, fulfillment, or refund behavior changes not explicitly scoped in the issue
+- PII collection, retention, or deletion behavior changes
+- checkout flow changes beyond the scoped acceptance criteria
+- architectural changes beyond the named subsystem
+
+## Repo-Specific Constraints
+
+- keep framework and hosting assumptions local
+
+<!-- END AGENTIC-SDLC PROJECT ADAPTER -->
